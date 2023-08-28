@@ -23,3 +23,13 @@ prouduct :
     -related items
     -quantity 
     -subtitle
+__________________________________________________________________________ 
+session 45 
+translation *
+add str methodes * 
+admin *
+added listview and listdetail:*
+add url file  
+added template dirs settings
+slice the template 
+		
