@@ -1,9 +1,9 @@
 prouduct :
     -name 
     -image 
-    -images 
+    -images *
     -price 
-    -review:
+    -review: *
         -image
         -author 
         -date
@@ -18,8 +18,8 @@ prouduct :
         -count of items 
 
     -descriptions
-    -tags
+    -tags####
     -flag
     -related items
     -quantity 
-    
+    -subtitle
