@@ -7,3 +7,4 @@ class ProductList(ListView):
 
 class ProductDetail(DetailView):
     model = Product
+

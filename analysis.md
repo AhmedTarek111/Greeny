@@ -29,7 +29,7 @@ translation *
 add str methodes * 
 admin *
 added listview and listdetail:*
-add url file  
-added template dirs settings
+add url file  *
+added template dirs settings*
+brand list and brand detail
 slice the template 
-		
