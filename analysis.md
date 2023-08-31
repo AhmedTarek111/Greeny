@@ -31,5 +31,6 @@ admin *
 added listview and listdetail:*
 add url file  *
 added template dirs settings*
-brand list and brand detail
-slice the template 
+slice the template *
+__________________________________________________________________________
+automation code to resize photos in product list page

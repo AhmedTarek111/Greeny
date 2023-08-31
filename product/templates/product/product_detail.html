@@ -1,6 +1,10 @@
 {% extends 'base.html' %}
 {% load static %}
+{% block css %}
+    <link rel="stylesheet" href="{% static 'en/css/product-details.css' %}">
+{% endblock css %}
 {% block body %}
+
         <!--=====================================
                     BANNER PART START
         =======================================-->
@@ -32,18 +36,16 @@
                                 <label class="details-label off">-10%</label>
                             </div>
                             <ul class="details-preview"> 
-                                <li><img src="images/product/01.jpg" alt="product"></li>
-                                <li><img src="images/product/01.jpg" alt="product"></li>
-                                <li><img src="images/product/01.jpg" alt="product"></li>
-                                <li><img src="images/product/01.jpg" alt="product"></li>
-                                <li><img src="images/product/01.jpg" alt="product"></li>
+                                {% for x  in images %}
+                                    <li><img src="{{ x.image.url }}" alt="product"></li>
+                                {% endfor %}
+                         
                             </ul>
                             <ul class="details-thumb">
-                                <li><img src="images/product/01.jpg" alt="product"></li>
-                                <li><img src="images/product/01.jpg" alt="product"></li>
-                                <li><img src="images/product/01.jpg" alt="product"></li>
-                                <li><img src="images/product/01.jpg" alt="product"></li>
-                                <li><img src="images/product/01.jpg" alt="product"></li>
+                                {% for x  in images %}
+                                    <li><img src="{{ x.image.url }}" alt="product"></li>
+                                {% endfor %}
+                         
                             </ul>
                         </div>
                     </div>
@@ -71,10 +73,10 @@
                             </li>
                         </ul>
                         <div class="details-content">
-                            <h3 class="details-name"><a href="#">existing product name</a></h3>
+                            <h3 class="details-name"><a href="#">{{object.name}}</a></h3>
                             <div class="details-meta">
-                                <p>SKU:<span>1234567</span></p>
-                                <p>BRAND:<a href="#">radhuni</a></p>
+                                <p>SKU:<span>{{object.sku}}</span></p>
+                                <p>BRAND:<a href="#">{{object.brand}}</a></p>
                             </div>
                             <div class="details-rating">
                                 <i class="active icofont-star"></i>
@@ -85,16 +87,16 @@
                                 <a href="#">(3 reviews)</a>
                             </div>
                             <h3 class="details-price">
-                                <del>$38.00</del>
-                                <span>$24.00<small>/per kilo</small></span>
+                                {% comment %} <del>$38.00</del> {% endcomment %}
+                                <span>{{object.price}}<small>/per unit</small></span>
                             </h3>
-                            <p class="details-desc">Lorem ipsum dolor sit amet consectetur adipisicing elit facere harum natus amet soluta fuga consectetur alias veritatis quisquam ab eligendi itaque eos maiores quibusdam.</p>
+                            <p class="details-desc">{{object.des}}</p>
                             <div class="details-list-group">
                                 <label class="details-list-title">tags:</label>
                                 <ul class="details-tag-list">
-                                    <li><a href="#">organic</a></li>
-                                    <li><a href="#">fruits</a></li>
-                                    <li><a href="#">chilis</a></li>
+                                    {% for tag  in object.tags.all %}
+                                        <li><a href="#">{{tag}}</a></li>
+                                    {% endfor %}
                                 </ul>
                             </div>
                             <div class="details-list-group">
@@ -147,7 +149,7 @@
                         <div class="product-details-frame">
                             <h3 class="frame-title">Description</h3>
                             <div class="tab-descrip">
-                                <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Consequatur, ex! Incidunt nemo aspernatur fugiat, saepe suscipit sit perferendis illum magnam voluptates aliquid blanditiis, dolor assumenda dolorem ullam harum, doloribus molestiae! Unde voluptas maiores exercitationem aperiam debitis accusantium, placeat vero neque, atque eius numquam incidunt, culpa a odit consequatur nostrum aut nisi quisquam sequi dignissimos sed. Odio necessitatibus officiis repudiandae omnis soluta fugiat aliquam eius quae. Unde, ipsam atque assumenda consequuntur quia alias nulla, cupiditate ab quos eveniet pariatur expedita repellendus fugit. Quisquam fuga et, dolore aut temporibus atque itaque nesciunt reiciendis nobis, deleniti nihil vel qui perferendis molestias aliquam doloremque.</p>
+                                <p>{{object.description}}</p>
                             </div>
                         </div>
                         <div class="product-details-frame">
@@ -156,7 +158,7 @@
                                 <tbody>
                                     <tr>
                                         <th scope="row">Product code</th>
-                                        <td>SKU: 101783</td>
+                                        <td>SKU: {{object.sku}}</td>
                                     </tr>
                                     <tr>
                                         <th scope="row">Weight</th>
