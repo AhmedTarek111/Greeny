@@ -43,7 +43,7 @@ class Review(models.Model):
     user = models.ForeignKey(User,verbose_name=_("User"),on_delete=models.SET_NULL,null=True)
     product = models.ForeignKey(Product,verbose_name=_("Product"),on_delete=models.CASCADE,related_name='product_review')
     review = models.TextField(verbose_name=_("Review"),max_length=500)
-    rate = models.IntegerField(verbose_name=_("Rate"),)
+    rate = models.IntegerField(verbose_name=_("Rate"))
     date = models.DateTimeField(verbose_name=_("Date"),default=timezone.now)
     def __str__(self):
         return f"{str(self.product)} -> {self.review}"
