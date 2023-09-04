@@ -14,5 +14,7 @@ class ProductDetail(DetailView):
         product = self.get_object()
         context["images"] = ProductImages.objects.filter(product_id=product.id)
         context["reviews"] = Review.objects.filter(product_id=product.id)
+        context["related_name"] = Product.objects.filter(brand=self.get_object().brand)
+        
         return context
     
