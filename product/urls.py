@@ -7,5 +7,6 @@ from .views import *
 urlpatterns = [
     path("products/",ProductList.as_view()),
     path("products/<slug:slug>/",ProductDetail.as_view()),
+    path("Brands/",BrandList.as_view()),
 ]
 
