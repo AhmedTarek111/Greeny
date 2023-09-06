@@ -19,7 +19,7 @@ class Product(models.Model):
     sku = models.CharField(verbose_name=_('SKU'),max_length=150)
     description = models.TextField(verbose_name=_('Description'),max_length=40000)
     flag = models.CharField(verbose_name=_('Flag'),max_length=50,choices=FLAG_CHOICES)
-    brand = models.ForeignKey('Brand',verbose_name=_('Brand'),on_delete=models.SET_NULL,null=True)
+    brand = models.ForeignKey('Brand',verbose_name=_('Brand'),on_delete=models.SET_NULL,null=True, related_name='brand_product')
     quantity = models.IntegerField(default=0)
     tags = TaggableManager()
     slug = models.SlugField(null=True ,blank=True)

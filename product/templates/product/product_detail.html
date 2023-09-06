@@ -33,7 +33,7 @@
                         <div class="details-gallery">
                             <div class="details-label-group">
                                 <label class="details-label new">new</label>
-                                <label class="details-label off">-10%</label>
+                                {% comment %} <label class="details-label off">-10%</label> {% endcomment %}
                             </div>
                             <ul class="details-preview"> 
                                 {% for x  in images %}
@@ -76,7 +76,7 @@
                             <h3 class="details-name"><a href="#">{{object.name}}</a></h3>
                             <div class="details-meta">
                                 <p>SKU:<span>{{object.sku}}</span></p>
-                                <p>BRAND:<a href="#">{{object.brand}}</a></p>
+                                <p>BRAND:<a href="/Brands/{{ object.brand.slug }}/">{{object.brand}}</a></p>
                             </div>
                             <div class="details-rating">
                                 <i class="active icofont-star"></i>
