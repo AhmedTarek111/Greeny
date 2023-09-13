@@ -6,10 +6,13 @@
     <title>Document</title>
 </head>
 <body>
+
    <h1>Debug Page</h1>
+   <h2>Number of proudcts = {{object_list| length}}</h2>
+   <hr>
     {% for product in object_list %}
      <ul>
-         <li> {{product}} -- {{product.brand}}</li>
+         <li> {{product}} </li>
     </ul>
     {% endfor %}
 </body>

@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'taggit',
     'product',
     "debug_toolbar",
+    "settings",
 ]
 
 MIDDLEWARE = [

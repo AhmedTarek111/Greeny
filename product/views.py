@@ -1,6 +1,8 @@
 from django.shortcuts import render
 from django.views.generic import ListView,DetailView
 from .models import *
+from django.db.models import Q , F
+from django.db.models import Count, Sum, Avg, Max, Min
 
 class ProductList(ListView):
     model = Product
@@ -8,6 +10,7 @@ class ProductList(ListView):
     
 class ProductDetail(DetailView):
     model = Product
+    paginate_by = 30
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -20,7 +23,7 @@ class ProductDetail(DetailView):
     
 class BrandList(ListView):
     model = Brand
-
+    queryset = Brand.objects.annotate(avg_rate=Count('brand_product'))
 
 class BrandDetail(ListView): # we use list view in this situation beacause the pagination is supported by default in the list view and beacause it not exist in the detail view
     model = Product
@@ -40,4 +43,7 @@ class BrandDetail(ListView): # we use list view in this situation beacause the p
 class Debug(ListView):
     model =Product 
     template_name ='product/debug.html'
+    queryset = Product.objects.distinct()
 
+
+    
