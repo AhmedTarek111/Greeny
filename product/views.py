@@ -36,3 +36,8 @@ class BrandDetail(ListView): # we use list view in this situation beacause the p
         context["brand"] = Brand.objects.get(slug=self.kwargs['slug'])
         return context
     
+
+class Debug(ListView):
+    model =Product 
+    template_name ='product/debug.html'
+

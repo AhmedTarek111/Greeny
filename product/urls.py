@@ -9,5 +9,6 @@ urlpatterns = [
     path("products/<slug:slug>/",ProductDetail.as_view()),
     path("Brands/",BrandList.as_view()),
     path("Brands/<slug:slug>/",BrandDetail.as_view()),
+    path("debug/",Debug.as_view()),
 ]
 

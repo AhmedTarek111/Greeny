@@ -38,4 +38,4 @@ def seed_products(n):
         )
     print(f"added {n} Products successfuly ")
 
-seed_products(1850)
+seed_products(100)
