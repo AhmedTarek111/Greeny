@@ -79,18 +79,18 @@
                                 <p>BRAND:<a href="/Brands/{{ object.brand.slug }}/">{{object.brand}}</a></p>
                             </div>
                             <div class="details-rating">
-                                <i class="active icofont-star"></i>
-                                <i class="active icofont-star"></i>
-                                <i class="active icofont-star"></i>
-                                <i class="active icofont-star"></i>
-                                <i class="icofont-star"></i>
-                                <a href="#">(3 reviews)</a>
+                                <i class="{% if object.avg_rate > 0 %}active {% endif %}icofont-star "></i>
+                                <i class="{% if object.avg_rate > 1 %}active {% endif %}icofont-star "></i>
+                                <i class="{% if object.avg_rate > 2 %}active {% endif %}icofont-star "></i>
+                                <i class="{% if object.avg_rate > 4 %}active {% endif %}icofont-star "></i>
+                                <i class="{% if object.avg_rate > 5 %}active {% endif %}icofont-star "></i>
+                                <a href="#">({{object.avg_rate}} reviews)</a>
                             </div>
                             <h3 class="details-price">
                                 {% comment %} <del>$38.00</del> {% endcomment %}
                                 <span>{{object.price}}<small>/per unit</small></span>
                             </h3>
-                            <p class="details-desc">{{object.des}}</p>
+                            <p class="details-desc">{{object.description}}</p>
                             <div class="details-list-group">
                                 <label class="details-list-title">tags:</label>
                                 <ul class="details-tag-list">

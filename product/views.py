@@ -6,12 +6,11 @@ from django.db.models import Count, Sum, Avg, Max, Min
 
 class ProductList(ListView):
     model = Product
-    
+    paginate_by =30
     
 class ProductDetail(DetailView):
     model = Product
-    paginate_by = 30
-
+    queryset = Product.objects.annotate(no_reviews=Count('product_review'))
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         product = self.get_object()
@@ -24,12 +23,15 @@ class ProductDetail(DetailView):
 class BrandList(ListView):
     model = Brand
     queryset = Brand.objects.annotate(avg_rate=Count('brand_product'))
+    
+  
 
 class BrandDetail(ListView): # we use list view in this situation beacause the pagination is supported by default in the list view and beacause it not exist in the detail view
     model = Product
     context_object_name = 'products_of_brand'
     template_name = 'product/brand_detail.html'
 
+ 
     def get_queryset(self):
         brand=Brand.objects.get(slug=self.kwargs['slug'])
         return super().get_queryset().filter(brand=brand)
