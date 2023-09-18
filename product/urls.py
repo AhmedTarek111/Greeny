@@ -10,8 +10,8 @@ urlpatterns = [
     path("Brands/",BrandList.as_view()),
     path("Brands/<slug:slug>/",BrandDetail.as_view()),
     path("debug/",Debug.as_view()),
-    path('api/list/',product_list_api),
-    path('api/list/<int:pk>',product_detail_api),
+    path('api/list/',product_list_api.as_view()),
+    path('api/list/<int:pk>',product_detail_api.as_view()),
 
 ]
 

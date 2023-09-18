@@ -2,16 +2,15 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from .serializers import ProductSerializers
 from .models import Product
-
-@api_view(['GET'])
-def product_list_api(request):
-    products = Product.objects.all()
-    data=ProductSerializers(products,many=True,context={'request':request}).data
-    return Response({'products':data},)
+from rest_framework.generics import ListAPIView
 
 
-@api_view(['GET'])
-def product_detail_api(request,pk):
-    products = Product.objects.get(id=pk)
-    data=ProductSerializers(products,context={'request':request}).data
-    return Response({'products':data},)
+
+class product_list_api(ListAPIView):
+    queryset = Product.objects.all()    
+    serializer_class = ProductSerializers
+
+class product_detail_api(ListAPIView):
+    queryset = Product.objects.all()   
+    serializer_class = ProductSerializers
+    
