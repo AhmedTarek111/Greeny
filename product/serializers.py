@@ -3,7 +3,7 @@ from .models import Product , Brand ,Review
 from django.db.models import Count,Avg
 from django.db.models.functions import Coalesce
 from django.db.models.functions import Round  
-
+from taggit.serializers import (TagListSerializerField,TaggitSerializer)
 
 class ProductListSerializers(serializers.ModelSerializer):
     brand=serializers.StringRelatedField()
@@ -23,9 +23,10 @@ class ProductListSerializers(serializers.ModelSerializer):
 
   
 
-class ProductDetailSerializers(serializers.ModelSerializer):
+class ProductDetailSerializers(serializers.ModelSerializer,TaggitSerializer,):
     avg_rate=serializers.SerializerMethodField()
     brand = serializers.StringRelatedField()
+    tags = TagListSerializerField()
     class Meta:
         model = Product
         fields = '__all__'
