@@ -7,11 +7,14 @@ from .api import *
 urlpatterns = [
     path("products/",ProductList.as_view()),
     path("products/<slug:slug>/",ProductDetail.as_view()),
-    path("Brands/",BrandList.as_view()),
-    path("Brands/<slug:slug>/",BrandDetail.as_view()),
+    path("brands/",BrandList.as_view()),
+    path("brands/<slug:slug>/",BrandDetail.as_view()),
     path("debug/",Debug.as_view()),
-    path('api/list/',product_list_api.as_view()),
-    path('api/list/<int:pk>',product_detail_api.as_view()),
+            # API
+    path('api/products/',product_list_API.as_view()),
+    path('api/products/<int:pk>/',CreateUpdateDelete.as_view()),
+    path('api/brands/', BrandListAPI.as_view() ),
+    path('api/brands/<int:pk>/',BrandDetailAPI.as_view()),
 
 ]
 
