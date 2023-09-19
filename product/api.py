@@ -11,7 +11,8 @@ from rest_framework.generics import ListAPIView,RetrieveUpdateDestroyAPIView,Ret
 class product_list_API(ListAPIView):
     queryset = Product.objects.all()    
     serializer_class = ProductListSerializers
-    filter_backends = [DjangoFilterBackend,filters.OrderingFilter]
+    filter_backends = [filters.SearchFilter,DjangoFilterBackend,filters.OrderingFilter]
+    search_fields = ['name', 'description','subtitle']
     filterset_fields = ['name',]
     ordering_fields = ['name', 'price']
 class CreateUpdateDelete(RetrieveUpdateDestroyAPIView):
@@ -24,5 +25,4 @@ class BrandListAPI(ListAPIView):
 
 class BrandDetailAPI(RetrieveAPIView):
     queryset =Brand.objects.all()
-    
     serializer_class = BrandDetailSeralizers
