@@ -6,6 +6,7 @@ from .models import Product ,Brand
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.generics import ListAPIView,RetrieveUpdateDestroyAPIView,RetrieveAPIView
 from .myfilter import ProudctFillter
+from .myPagination import MyPagination
 
 
 class product_list_API(ListAPIView):
@@ -16,6 +17,7 @@ class product_list_API(ListAPIView):
     filterset_fields = ['name','price']
     ordering_fields = ['name', 'price']
     filterset_class =ProudctFillter
+    pagination_class =MyPagination
 class CreateUpdateDelete(RetrieveUpdateDestroyAPIView):
     queryset = Product.objects.all()   
     serializer_class = ProductDetailSerializers
