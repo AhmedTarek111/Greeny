@@ -15,6 +15,6 @@ urlpatterns = [
     path('api/products/<int:pk>/',CreateUpdateDelete.as_view()),
     path('api/brands/', BrandListAPI.as_view() ),
     path('api/brands/<int:pk>/',BrandDetailAPI.as_view()),
-
+    
 ]
 

@@ -7,6 +7,8 @@ from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.generics import ListAPIView,RetrieveUpdateDestroyAPIView,RetrieveAPIView
 from .myfilter import ProudctFillter
 from .myPagination import MyPagination
+from rest_framework.authentication import SessionAuthentication, BasicAuthentication
+from rest_framework.permissions import IsAuthenticated
 
 
 class product_list_API(ListAPIView):
@@ -18,6 +20,7 @@ class product_list_API(ListAPIView):
     ordering_fields = ['name', 'price']
     filterset_class =ProudctFillter
     pagination_class =MyPagination
+    permission_classes = [IsAuthenticated]
 class CreateUpdateDelete(RetrieveUpdateDestroyAPIView):
     queryset = Product.objects.all()   
     serializer_class = ProductDetailSerializers
