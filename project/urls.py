@@ -28,12 +28,12 @@ urlpatterns = [
     path('', include('settings.urls')),
     # debug
     path("__debug__/", include("debug_toolbar.urls")),
-    #jwt token 
+    # AUTHENTICATION 
+    path('dj-rest-auth/', include('dj_rest_auth.urls')),
+      #jwt token 
     path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
-    path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
-
- 
+    path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'), 
 ]
-
+  
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
