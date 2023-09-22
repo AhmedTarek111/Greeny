@@ -50,3 +50,8 @@ class BrandDetailSeralizers(serializers.ModelSerializer):
     class Meta:
         model = Brand
         fields ='__all__'
+
+class Create_products(serializers.ModelSerializer):
+    class Meta:
+        model = Product
+        fields =['name','subtitle','image','price','sku','description','flag','brand','quantity','tags']
