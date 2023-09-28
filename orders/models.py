@@ -14,7 +14,7 @@ class Cart(models.Model):
     status = models.CharField(max_length=50,choices=CART_CHOICES)
     def __str__(self):
        return str(self.user)
-
+{}
 class CartDetail(models.Model):
     cart =models.ForeignKey(Cart,on_delete=models.CASCADE,related_name='cart_detail')
     products = models.ForeignKey(Product,on_delete=models.SET_NULL,null=True,blank=True, related_name='cart_detail_products')
