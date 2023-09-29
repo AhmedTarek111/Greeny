@@ -48,28 +48,29 @@
                         {% for object  in object_list %}                                   
                             <div class="orderlist">
                                 <div class="orderlist-head">
-                                    <h5>order#01</h5>
-                                    <h5>order {{ object.status  }}</h5>
+                                    <h5>order ( {{ forloop.counter }} )</h5>
+                                    <h5>{{ object.status  }}</h5>
                                 </div>
                                 <div class="orderlist-body">
                                     <div class="row">
                                         <div class="col-lg-12">
                                             <div class="order-track">
                                                 <ul class="order-track-list">
-                                                    <li class="order-track-item active">
-                                                        <i class="icofont-check"></i>
-                                                        <span>order recieved</span>
+                                                    <li class="order-track-item {% if object.status == 'Order Received' or object.status == 'Order Processed' or object.status == 'Order Shipped' or object.status == 'Order Delivered' %} active {% else %}close{% endif %}">
+                                                        <i class="icofont-{% if object.status == 'Order Received' or object.status == 'Order Processed' or object.status == 'Order Shipped' or object.status == 'Order Delivered' %}check {% else %}close{% endif %}"></i>
+                                                        <span>order received</span>
                                                     </li>
-                                                    <li class="order-track-item">
-                                                        <i class="icofont-close"></i>
+                                                    <!-- Repeat this block for other list items with appropriate conditions -->
+                                                    <li class="order-track-item {% if object.status == 'Order Processed' or object.status == 'Order Shipped' or object.status == 'Order Delivered' %} active {% else %}close{% endif %}">
+                                                        <i class="icofont-{% if object.status == 'Order Processed' or object.status == 'Order Shipped' or object.status == 'Order Delivered' %}check {% else %}close{% endif %}"></i>
                                                         <span>order processed</span>
                                                     </li>
-                                                    <li class="order-track-item">
-                                                        <i class="icofont-close"></i>
+                                                    <li class="order-track-item {% if object.status == 'Order Shipped' or object.status == 'Order Delivered' %} active {% else %}close{% endif %}">
+                                                        <i class="icofont-{% if object.status == 'Order Shipped' or object.status == 'Order Delivered' %}check {% else %}close{% endif %}"></i>
                                                         <span>order shipped</span>
                                                     </li>
-                                                    <li class="order-track-item">
-                                                        <i class="icofont-close"></i>
+                                                    <li class="order-track-item {% if object.status == 'Order Delivered' %} active {% else %}close{% endif %}">
+                                                        <i class="icofont-{% if object.status ==  'Order Delivered' %}check {% else %}close{% endif %}"></i>
                                                         <span>order delivered</span>
                                                     </li>
                                                 </ul>
@@ -135,15 +136,15 @@
                                                         </tr>
                                                     </thead>
                                                     <tbody>
-                                                        {% for x in object.order_detail.all %}
+                                                        {% for p in object.order_detail.all %}
                                                             
                                                         <tr>
                                                             <td class="table-serial"><h6>{{ forloop.counter }}</h6></td>
-                                                            <td class="table-image"><img src="{{  x.products.image.url }}" alt="product"></td>
-                                                            <td class="table-name"><h6>{{  x.products.name }}</h6></td>
-                                                            <td class="table-price"><h6>${{x.products.price}}<small>/kilo</small></h6></td>
-                                                            <td class="table-brand"><h6>{{x.products.brand}}y</h6></td>
-                                                            <td class="table-quantity"><h6>{{x.products.quantity}}</h6></td>
+                                                            <td class="table-image"><img src="{{  p.products.image.url }}" alt="product"></td>
+                                                            <td class="table-name"><h6>{{  p.products.name }}</h6></td>
+                                                            <td class="table-price"><h6>${{p.products.price}}<small>/kilo</small></h6></td>
+                                                            <td class="table-brand"><h6>{{p.products.brand}}</h6></td>
+                                                            <td class="table-quantity"><h6>{{p.products.quantity}}</h6></td>
                                                         </tr>
                                                         
                                                         {% endfor %}
