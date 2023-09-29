@@ -23,9 +23,12 @@ from rest_framework_simplejwt.views import (
     TokenRefreshView,
 )
 urlpatterns = [
+    # apps
     path('admin/', admin.site.urls),
     path('', include('product.urls')),
     path('', include('settings.urls')),
+    path('orders/',include('orders.urls')),
+    
     # debug
     path("__debug__/", include("debug_toolbar.urls")),
     # AUTHENTICATION 

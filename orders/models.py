@@ -44,7 +44,7 @@ class Order(models.Model):
     coupon = models.ForeignKey('Order',on_delete=models.SET_NULL,null=True,blank=True,related_name='order_coupon')
     total_after_coupon = models.CharField(max_length=30)
     order_time = models.DateTimeField(default=timezone.now)
-    delevery_time= models.DateTimeField(null=True,blank=True)
+    delivery_time= models.DateTimeField(null=True,blank=True)
     
     def __str__(self):
        return self.code
