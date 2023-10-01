@@ -9,6 +9,7 @@ https://docs.djangoproject.com/en/4.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.2/ref/settings/
 """
+from django.utils.translation import gettext_lazy as _
 from pathlib import Path
 import os 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -65,6 +66,7 @@ REST_FRAMEWORK = {
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    "django.middleware.locale.LocaleMiddleware",
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     "debug_toolbar.middleware.DebugToolbarMiddleware",
@@ -170,3 +172,10 @@ REST_AUTH = {
     'JWT_AUTH_COOKIE': 'jwt-auth',
 }
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+LOCALE_PATHS = [
+    "locale",
+]
+LANGUAGES = [
+    ("ar", _("Arabic")),
+    ("en", _("English")),
+]

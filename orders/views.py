@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 from .models import *
 from django.views.generic import ListView
 from django.contrib.auth.decorators import login_required
@@ -23,3 +23,10 @@ def order_checkout(request):
         'cart_detail':cart_detail
     }
     return render(request ,'orders/checkout.html',context)
+
+def add_to_cart(request):
+    cart=Cart.objects.get(user=request.user,status='In Progress')
+    quantity=int(request.POST['quantity'])
+    product= Product.objects.get(id=request.POST['products'])
+    cart_detail=CartDetail.objects.get_or_create(cart=cart ,products=product,quantity=quantity,total=round(int(product.price) * quantity,2))
+    return redirect(f"/products/{product.slug}/")

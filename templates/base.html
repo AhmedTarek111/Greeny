@@ -31,6 +31,10 @@
         <!-- FAVICON -->
         <link rel="icon" href="images/favicon.png">
 
+        <!-- Bootstrap -->
+        {% block bootstrap %}
+
+        {% endblock bootstrap %}
         <!-- FONTS -->
         <link rel="stylesheet" href="{% static 'en/fonts/flaticon/flaticon.css '%}">
         <link rel="stylesheet" href="{% static 'en/fonts/icofont/icofont.min.css '%}">
@@ -376,7 +380,7 @@
                         </div>
                         <div class="cart-info-group">
                             <div class="cart-info">
-                                <h6><a href="product-single.html">{{  item.products.name }}</a></h6>
+                                <h6><a href="/products/{{item.products.slug}}/">{{  item.products.name }}</a></h6>
                                 <p>Unit Price - ${{ item.products.price  }}</p>
                             </div>
                             <div class="cart-action-group">
@@ -395,7 +399,7 @@
             <div class="cart-footer">
                 
                 </form>
-                <a class="cart-checkout-btn" href="checkout.html">
+                <a class="cart-checkout-btn" href="{% url "orders:checkout" %}">
                     <span class="checkout-label">Proceed to Checkout</span>
                     <span class="checkout-price">{{  cart_data.cart_total }}</span>
                 </a>
@@ -839,6 +843,11 @@
         <!--=====================================
                     JS LINK PART START
         =======================================-->
+       <!-- bootstrap js -->
+       {% block bootstrap_js %}
+
+       {% endblock bootstrap_js %}
+
         <!-- VENDOR -->
         <script src="{% static 'en/vendor/bootstrap/jquery-1.12.4.min.js' %}"></script>
         <script src="{% static 'en/vendor/bootstrap/popper.min.js' %}"></script>
