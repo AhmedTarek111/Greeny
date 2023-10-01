@@ -395,15 +395,18 @@
                                         {% comment %} <del>$34</del> {% endcomment %}
                                         <span>${{product.price}}</span>
                                     </h6>
-                                    <button class="product-add" title="Add to Cart">
-                                        <i class="fas fa-shopping-basket"></i>
-                                        <span>add</span>
-                                    </button>
-                                    <div class="product-action">
-                                        <button class="action-minus" title="Quantity Minus"><i class="icofont-minus"></i></button>
-                                        <input class="action-input" title="Quantity Number" type="text" name="quantity" value="1">
-                                        <button class="action-plus" title="Quantity Plus"><i class="icofont-plus"></i></button>
-                                    </div>
+                                  <form action="{% url "orders:add_to_cart" %}" method="post"> 
+                                        {% csrf_token %}
+                                        <button class="product-add" title="Add to Cart">
+                                            <i class="fas fa-shopping-basket"></i>
+                                            <span>add</span>
+                                        </button>
+                                    
+                                        <div class="product-action">
+                                            <input class=""  type="text" name="quantity" value="1">
+                                            <input type="text" name="products" value="{{product.id}}" hidden>
+                                        </div>
+                                </form>
                                 </div>
                             </div>
                         </div>

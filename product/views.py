@@ -23,6 +23,7 @@ class ProductDetail(DetailView):
 class BrandList(ListView):
     model = Brand
     queryset = Brand.objects.annotate(avg_rate=Count('brand_product'))
+    paginate_by=20
     
   
 
