@@ -6,5 +6,6 @@ app_name='orders'
 urlpatterns = [
     path('',OrderList.as_view()),
     path('checkout/',order_checkout,name='checkout'),
-    path('add_to_cart/',add_to_cart,name='add_to_cart')
+    path('add_to_cart/',add_to_cart,name='add_to_cart'),
+    path('delete_from_cart/',remove_from_cart,name='delete')
 ]
