@@ -2,6 +2,9 @@ from .models import *
 from .serializers import *
 from rest_framework.generics import GenericAPIView,ListAPIView,RetrieveAPIView
 from rest_framework.response import Response
+from django.shortcuts import get_object_or_404
+import datetime
+from django.contrib.auth.models import User
 
 class CartAPI(GenericAPIView):
     def get(self,request,*args, **kwargs):
@@ -91,3 +94,27 @@ class CreateOrderAPI(GenericAPIView):
 
              }
              )
+
+class ApplyCouponAPI(GenericAPIView):
+     serializer_class =ApplyCouponSerializer
+
+     def post(self,request,*args, **kwargs):
+        user =User.objects.get(username=self.kwargs['username'])
+        cart = Cart.objects.get(user=user,status='In Progress')
+        coupon = Coupon.objects.get(code=request.data['code'])
+        if coupon and coupon.quantity > 0:
+                now_date_time = datetime.datetime.today().date()  # Corrected the method call
+                if now_date_time >= coupon.start_date.date() and now_date_time <= coupon.end_date.date():
+                    discount_value = cart.cart_total() * coupon.discount / 100
+                    total_cart = cart.cart_total() - discount_value
+                    cart.total_after_coupon = total_cart
+                    coupon.quantity -= 1
+                    coupon.save()
+                    cart.coupon = coupon
+                    cart.save()
+                    return Response({ 'message' : 'the coupon has been applied successfully '})
+                else:
+                    return Response({'message':'the coupon time not valid'})
+        else:
+                return Response({'message':'the coupon not valid'})
+    
