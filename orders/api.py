@@ -53,3 +53,41 @@ class OrderListAPI(ListAPIView):
 class OrderDetailAPI(RetrieveAPIView):
      serializer_class = OrderListSerializers
      queryset = Order.objects.all()
+
+
+class CreateOrderAPI(GenericAPIView):
+     
+    def get(self,*args, **kwargs):
+        #   cart -> order
+        #   cart detail -> order detail 
+
+        user =User.objects.get(username=self.kwargs['username'])
+        cart = Cart.objects.get(user=user ,  status='In Progress')
+
+        new_order =Order.objects.create(
+             user =user,
+             status = 'Order Recieved',
+             coupon =cart.coupon,
+             total_after_coupon =cart.total_after_coupon,
+        )
+
+        cart_detail=CartDetail.objects.filter(cart=cart)
+        for object in cart_detail:
+                OrderDetail.objects.create(
+                    order=new_order,
+                    products = object.products,
+                    quantity = object.quantity,
+                    price = object.price,
+                    total=round(int(object.products.price) * object.quantity,2)
+
+                    
+                               
+                )
+        cart.status ='Completed'
+        cart.save()
+
+        return Response({
+             'message':'the order has been created',
+
+             }
+             )

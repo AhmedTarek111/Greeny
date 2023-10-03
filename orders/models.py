@@ -12,7 +12,9 @@ class Cart(models.Model):
   
     user = models.ForeignKey(User,on_delete=models.CASCADE,related_name='cart_user')
     status = models.CharField(max_length=50,choices=CART_CHOICES)
-    
+    coupon = models.ForeignKey('Coupon',on_delete=models.SET_NULL,null=True,blank=True,related_name='cart_coupon')
+    total_after_coupon = models.CharField(max_length=30,null=True,blank=True)
+
     def cart_total(self):
         total = 0
         for i in self.cart_detail.all():
@@ -25,6 +27,7 @@ class Cart(models.Model):
 class CartDetail(models.Model):
     cart =models.ForeignKey(Cart,on_delete=models.CASCADE,related_name='cart_detail')
     products = models.ForeignKey(Product,on_delete=models.SET_NULL,null=True,blank=True, related_name='cart_detail_products')
+    price =  models.FloatField()
     quantity= models.IntegerField(default=1)
     total = models.FloatField(null=True,blank=True)
     def __str__(self):
@@ -41,16 +44,17 @@ class Order(models.Model):
     user = models.ForeignKey(User,on_delete=models.CASCADE,related_name='order_user')
     code = models.CharField(max_length=15,default=generate_code())
     status = models.CharField(max_length=50,choices=ORDER_STATUS)
-    coupon = models.ForeignKey('Order',on_delete=models.SET_NULL,null=True,blank=True,related_name='order_coupon')
-    total_after_coupon = models.CharField(max_length=30)
+    coupon = models.ForeignKey('Coupon',on_delete=models.SET_NULL,null=True,blank=True,related_name='order_coupon')
+    total_after_coupon = models.CharField(max_length=30,null=True,blank=True)
     order_time = models.DateTimeField(default=timezone.now)
     delivery_time= models.DateTimeField(null=True,blank=True)
     
-    def __str__(self):
+    def __str__(self):    
        return self.code
 class OrderDetail(models.Model):
     order = models.ForeignKey(Order,on_delete=models.CASCADE,related_name='order_detail')
     products= models.ForeignKey(Product,on_delete=models.CASCADE,related_name='order_detail_products')
+    price =  models.FloatField()
     quantity= models.IntegerField(default=1)
     total = models.FloatField(null=True,blank=True)
     
