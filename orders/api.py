@@ -1,6 +1,6 @@
 from .models import *
 from .serializers import *
-from rest_framework.generics import GenericAPIView,ListAPIView
+from rest_framework.generics import GenericAPIView,ListAPIView,RetrieveAPIView
 from rest_framework.response import Response
 
 class CartAPI(GenericAPIView):
@@ -50,4 +50,6 @@ class OrderListAPI(ListAPIView):
              data = OrderListSerializers(order,many=True).data
              return Response(data)
 
-
+class OrderDetailAPI(RetrieveAPIView):
+     serializer_class = OrderListSerializers
+     queryset = Order.objects.all()

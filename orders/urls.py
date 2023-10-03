@@ -12,4 +12,6 @@ urlpatterns = [
     path('api/<str:username>/cart/',CartAPI.as_view()),
     path('api/<str:username>/cart/delete',CartAPI.as_view()),
     path('api/<str:username>/list',OrderListAPI.as_view()),
+    path('api/<str:username>/<int:pk>',OrderDetailAPI.as_view()),
+
 ]
