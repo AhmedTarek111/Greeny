@@ -5,3 +5,4 @@ def generate_code(length=15):
     code = ''.join(random.choice(data) for _ in range(length))
     return code
     
+

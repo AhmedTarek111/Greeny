@@ -30,7 +30,7 @@ class RertrieveUpdateDelete(RetrieveUpdateDestroyAPIView):
     queryset = Product.objects.all()   
     serializer_class = ProductDetailSerializers
 
-class BrandListAPI(ListAPIView):
+class BrandListAPI(ListAPIView): 
     queryset =Brand.objects.all()
     serializer_class = BrandListSeralizers
 

@@ -96,7 +96,6 @@ class CreateOrderAPI(GenericAPIView):
              )
 
 class ApplyCouponAPI(GenericAPIView):
-     serializer_class =ApplyCouponSerializer
 
      def post(self,request,*args, **kwargs):
         user =User.objects.get(username=self.kwargs['username'])
