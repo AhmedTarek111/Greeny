@@ -41,11 +41,9 @@ def add_to_cart(request):
     })
 
     if not created:
-        # A CartDetail with the same cart and product already existed, so update the quantity
         cart_detail.quantity += quantity
         cart_detail.total = round(cart_detail.price * cart_detail.quantity, 2)
         cart_detail.save()
-        print(100*"#")
     return redirect(f"/products/{product.slug}/")
 
 def remove_from_cart(request):
