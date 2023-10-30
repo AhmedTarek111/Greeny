@@ -1,7 +1,3 @@
-Certainly! Below is a sample GitHub README for your Django e-commerce project called "Greeny." You can customize and expand it as needed:
-
----
-
 # Greeny - Your Sustainable E-Commerce Solution
 
 ![Greeny Logo](https://github.com/AhmedTarek111/Greeny/assets/125690095/fe3dd947-38c3-49c7-a77a-5d58e4a58a16)
