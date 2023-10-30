@@ -84,12 +84,13 @@ To get Greeny up and running on your local machine, follow these steps:
    Open your web browser and visit [http://localhost:8000](http://localhost:8000).
 
 
-## Screenshots![Greeny3](https://github.com/AhmedTarek111/Greeny/assets/125690095/15ecc5eb-22cf-437f-9635-06668d117ebf)
+## Screenshots
+![Greeny](https://github.com/AhmedTarek111/Greeny/assets/125690095/2acb2c91-cc77-48f7-be45-d55bb12b89d9)
 
-Screenshot 2
+
 ![Screenshot 2](https://github.com/AhmedTarek111/Greeny/assets/125690095/74ca41cf-356c-4487-be6b-beff72ba3717)
 
-Screenshot 3
+
 ![Screenshot 3](https://github.com/AhmedTarek111/Greeny/assets/125690095/af60f32d-4174-47ea-a0de-c789f6ae046f)
 
 
