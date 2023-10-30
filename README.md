@@ -4,7 +4,8 @@ Certainly! Below is a sample GitHub README for your Django e-commerce project ca
 
 # Greeny - Your Sustainable E-Commerce Solution
 
-![Greeny Logo](link_to_your_logo.png)
+![Greeny Logo](https://github.com/AhmedTarek111/Greeny/assets/125690095/fe3dd947-38c3-49c7-a77a-5d58e4a58a16)
+
 
 Welcome to Greeny, an eco-friendly e-commerce platform dedicated to providing a sustainable shopping experience. Greeny allows customers to discover and purchase a wide range of environmentally conscious products, helping you make greener choices while you shop.
 
@@ -13,8 +14,7 @@ Welcome to Greeny, an eco-friendly e-commerce platform dedicated to providing a 
 - [Features](#features)
 - [Tech Stack](#tech-stack)
 - [Getting Started](#getting-started)
-- [Contributing](#contributing)
-- [License](#license)
+
 
 ## Features
 
@@ -87,14 +87,14 @@ To get Greeny up and running on your local machine, follow these steps:
 8. **Access Greeny:**
    Open your web browser and visit [http://localhost:8000](http://localhost:8000).
 
-## Contributing
 
-We welcome contributions from the open-source community. If you'd like to contribute to Greeny, please check out our [contributing guidelines](CONTRIBUTING.md) to get started.
+## Screenshots![Greeny3](https://github.com/AhmedTarek111/Greeny/assets/125690095/15ecc5eb-22cf-437f-9635-06668d117ebf)
 
-## License
+Screenshot 2
+![Screenshot 2](https://github.com/AhmedTarek111/Greeny/assets/125690095/74ca41cf-356c-4487-be6b-beff72ba3717)
 
-Greeny is open-source software released under the [MIT License](LICENSE).
+Screenshot 3
+![Screenshot 3](https://github.com/AhmedTarek111/Greeny/assets/125690095/af60f32d-4174-47ea-a0de-c789f6ae046f)
 
----
 
-Feel free to replace the placeholder values (e.g., `link_to_your_logo.png`) with actual content specific to your project. Additionally, make sure to include proper documentation and setup instructions for your project as needed.
+...
