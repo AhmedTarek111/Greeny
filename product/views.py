@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.views.generic import ListView,DetailView
+from django.views.decorators.cache import cache_page
 from .models import *
 from django.db.models import Q , F
 from django.db.models import Count, Sum, Avg, Max, Min
@@ -42,11 +43,8 @@ class BrandDetail(ListView): # we use list view in this situation beacause the p
         context["brand"] = Brand.objects.get(slug=self.kwargs['slug'])
         return context
     
-
-class Debug(ListView):
-    model =Product 
-    template_name ='product/debug.html'
-    queryset = Product.objects.distinct()
-
+@cache_page(60*1)
+def debug(request):
+    return render(request,'debug.html',{'debug':Product.objects.all()})
 
     

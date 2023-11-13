@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 from django.utils.translation import gettext_lazy as _
 from pathlib import Path
 import os 
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -51,8 +52,11 @@ INSTALLED_APPS = [
     'allauth.account',
     'dj_rest_auth.registration',
     'orders',
+    'redis',
 ]
+
 SITE_ID = 1
+
 REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
     'PAGE_SIZE': 30,
@@ -179,3 +183,10 @@ LANGUAGES = [
     ("ar", _("Arabic")),
     ("en", _("English")),
 ]
+
+CACHES = {
+    "default": {
+        "BACKEND": "django.core.cache.backends.redis.RedisCache",
+        "LOCATION": "redis://127.0.0.1:6379",
+    }
+}

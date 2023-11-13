@@ -14,7 +14,7 @@ urlpatterns = [
     path("products/<slug:slug>/",ProductDetail.as_view()),
     path("brands/",BrandList.as_view()),
     path("brands/<slug:slug>/",BrandDetail.as_view()),
-    path("debug/",Debug.as_view()),
+    path("debug/",debug),
                     # API
     path('api/products/',product_list_API.as_view()),
     path('api/products/<int:pk>/',RertrieveUpdateDelete.as_view()),

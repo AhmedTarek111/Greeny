@@ -3,6 +3,7 @@ from product.models import Product,Brand,Review
 from django.db.models import Count,Avg
 from django.db.models.functions import Round  
 from django.db.models.functions import Coalesce
+
 def home(request):
     
     context={
