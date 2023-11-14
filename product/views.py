@@ -4,7 +4,7 @@ from django.views.decorators.cache import cache_page
 from .models import *
 from django.db.models import Q , F
 from django.db.models import Count, Sum, Avg, Max, Min
-
+from .tasks import send_emails
 class ProductList(ListView):
     model = Product
     paginate_by =30
@@ -45,6 +45,7 @@ class BrandDetail(ListView): # we use list view in this situation beacause the p
     
 @cache_page(60*1)
 def debug(request):
+    send_emails.delay()
     return render(request,'debug.html',{'debug':Product.objects.all()})
 
     
