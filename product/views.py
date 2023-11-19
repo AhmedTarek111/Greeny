@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 from django.views.generic import ListView,DetailView
 from django.views.decorators.cache import cache_page
 from .models import *
@@ -48,4 +48,16 @@ def debug(request):
     send_emails.delay()
     return render(request,'debug.html',{'debug':Product.objects.all()})
 
+def add_review(request,slug):
+    rate=request.POST.get("rate")
+    review=request.POST.get("review")
+    product=Product.objects.get(slug=slug)
     
+    Review.objects.create(
+        user=request.user,
+        rate=rate,
+        review=review,
+        product=product 
+    )
+    
+    return redirect(f'/products/{product.slug}/')

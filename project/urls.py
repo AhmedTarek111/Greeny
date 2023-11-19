@@ -25,7 +25,7 @@ from rest_framework_simplejwt.views import (
 urlpatterns = [
     # apps
     path('admin/', admin.site.urls),
-    path('', include('product.urls' )),
+    path('', include('product.urls',namespace='products' ) ),
     path('', include('settings.urls')),
     path('orders/',include('orders.urls',namespace='orders'),),
     

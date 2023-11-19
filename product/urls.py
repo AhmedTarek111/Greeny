@@ -6,7 +6,7 @@ from .views import *
 from .api import *
 
 
-
+app_name="product"
 
 urlpatterns = [
     
@@ -15,6 +15,7 @@ urlpatterns = [
     path("brands/",BrandList.as_view()),
     path("brands/<slug:slug>/",BrandDetail.as_view()),
     path("debug/",debug),
+    path("add_review/<slug:slug>/",add_review,name="add_review"),
                     # API
     path('api/products/',product_list_API.as_view()),
     path('api/products/<int:pk>/',RertrieveUpdateDelete.as_view()),
