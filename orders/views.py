@@ -4,6 +4,8 @@ from django.views.generic import ListView
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 import datetime
+from django.http import JsonResponse 
+from django.template.loader import render_to_string 
 from .models import Deleviry_fee
 class OrderList(LoginRequiredMixin,ListView):
     model = Order
@@ -31,14 +33,17 @@ def order_checkout(request):
                         cart.coupon = coupon
                         cart.save()
                         total = round(delivery_fee + total_cart,2)
-                        return render(request, 'orders/checkout.html', {
+                        
+                        html = render_to_string('include/apply_coupon_include.html',{
                             'cart_detail': cart_detail,
                             'sub_total': cart.cart_total,
                             'cart_total': total,
                             'coupon': discount_value,
                             'delivery_fee': delivery_fee,
                         })
+                        return JsonResponse({'result':html})
     else:
+                       
         total_cart = cart.cart_total()
         total = delivery_fee + total_cart
 
@@ -49,9 +54,6 @@ def order_checkout(request):
             'coupon': discount_value,
             'delivery_fee': delivery_fee,
     })
-
-from django.shortcuts import get_object_or_404, redirect
-from .models import Cart, CartDetail, Product
 
 def add_to_cart(request):
     cart = Cart.objects.get(user=request.user, status='In Progress')
