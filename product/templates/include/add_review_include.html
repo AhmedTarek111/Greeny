@@ -1,0 +1,24 @@
+<h3 class="frame-title">Reviews ({{object.product_review.all | length}})</h3>
+{% for review in reviews %}
+    <ul class="review-list">
+        <li class="review-item">
+            <div class="review-media">
+                <a class="review-avatar" href="#">
+                    <img src="images/avatar/01.jpg" alt="review">
+                </a>
+                <h5 class="review-meta">
+                    <a href="#">{{review.user}}</a>
+                    <span>{{review.date |date:"F m, Y" }}</span>
+                </h5>
+            </div>
+            <ul class="review-rating">
+                {% for x in "12345" %}
+                    <li class="icofont-ui-{% if x|add:'0' <= review.rate %}rating{% else %}rate-blank{% endif %}"></li>
+                {% endfor %}
+            </ul>
+            
+            <p class="review-desc">{{review.review}}</p>
+
+        </li> 
+    </ul>
+{% endfor %}

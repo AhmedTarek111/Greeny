@@ -1,4 +1,6 @@
 from django.shortcuts import render,redirect
+from django.http import JsonResponse 
+from django.template.loader import render_to_string 
 from django.views.generic import ListView,DetailView
 from django.views.decorators.cache import cache_page
 from .models import *
@@ -59,5 +61,6 @@ def add_review(request,slug):
         review=review,
         product=product 
     )
-    
-    return redirect(f'/products/{product.slug}/')
+    reviews = Review.objects.filter(product=product)
+    html = render_to_string('include/add_review_include.html',{'reviews':reviews})
+    return JsonResponse({'result':html})
