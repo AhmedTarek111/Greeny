@@ -75,3 +75,9 @@ class Coupon(models.Model):
        week= timezone.timedelta(days=7)
        self.end_date = self.start_date + week
        super(Coupon, self).save(*args, **kwargs)
+
+class Deleviry_fee(models.Model):
+    fee = models.FloatField()
+    
+    def __str__(self):
+        return str(self.fee)

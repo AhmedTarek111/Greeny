@@ -3,12 +3,8 @@ from .models import *
 from django.views.generic import ListView
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
-
-
-
-
-
-
+import datetime
+from .models import Deleviry_fee
 class OrderList(LoginRequiredMixin,ListView):
     model = Order
     paginate_by =3
@@ -20,10 +16,39 @@ class OrderList(LoginRequiredMixin,ListView):
 def order_checkout(request):
     cart = Cart.objects.get(user=request.user,status='In Progress')
     cart_detail =CartDetail.objects.filter(cart=cart)
-    context ={
-        'cart_detail':cart_detail
-    }
-    return render(request ,'orders/checkout.html',context)
+    delivery_fee = Deleviry_fee.objects.last().fee
+    discount_value=0
+    if request.method == 'POST':
+        coupon = Coupon.objects.get(code=request.POST['code'])
+        if coupon and coupon.quantity > 0:
+                now_date_time = datetime.datetime.today().date()  
+                if coupon and coupon.start_date.date() <= now_date_time <= coupon.end_date.date():
+                        discount_value = cart.cart_total() * coupon.discount / 100
+                        total_cart = cart.cart_total() - discount_value
+                        cart.total_after_coupon = total_cart
+                        coupon.quantity -= 1
+                        coupon.save()
+                        cart.coupon = coupon
+                        cart.save()
+                        total = round(delivery_fee + total_cart,2)
+                        return render(request, 'orders/checkout.html', {
+                            'cart_detail': cart_detail,
+                            'sub_total': cart.cart_total,
+                            'cart_total': total,
+                            'coupon': discount_value,
+                            'delivery_fee': delivery_fee,
+                        })
+    else:
+        total_cart = cart.cart_total()
+        total = delivery_fee + total_cart
+
+    return render(request, 'orders/checkout.html', {
+            'cart_detail': cart_detail,
+            'sub_total': total_cart,
+            'cart_total': total,
+            'coupon': discount_value,
+            'delivery_fee': delivery_fee,
+    })
 
 from django.shortcuts import get_object_or_404, redirect
 from .models import Cart, CartDetail, Product
