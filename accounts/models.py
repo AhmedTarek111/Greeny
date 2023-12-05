@@ -1,5 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 from utils.generate_codes import generate_code
 # Create your models here.
 
@@ -7,6 +9,13 @@ class Profile(models.Model):
     user = models.OneToOneField(User,on_delete=models.CASCADE,related_name='profile')
     image = models.ImageField(upload_to='profile')
     code = models.CharField(max_length=100,default=generate_code)
+    
+    @receiver(post_save,sender=User)    
+    def create_profile(sender,instance,created,**kwargs):
+        if created:
+            Profile.objects.create(
+                user = instance
+            )
 CONTACT_NUMBER_CHOICES = (
     ('Primary','Primary'),
     ('Secondary','Secondary'),
