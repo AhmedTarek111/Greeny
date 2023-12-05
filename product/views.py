@@ -45,9 +45,9 @@ class BrandDetail(ListView): # we use list view in this situation beacause the p
         context["brand"] = Brand.objects.get(slug=self.kwargs['slug'])
         return context
     
-@cache_page(60*1)
+# @cache_page(60*1)
 def debug(request):
-    send_emails.delay()
+    # send_emails.delay()
     return render(request,'debug.html',{'debug':Product.objects.all()})
 
 def add_review(request,slug):
