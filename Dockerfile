@@ -6,8 +6,7 @@ ENV PYTHONUNBUFFERED = 1
 
 # UPDATE LINUX KERNAL & SETUP TOOLS 
 
-RUN  apt-get upadate  && apt-get -y install gcc libpq-dev
-
+RUN apt-get update && \apt-get -y install gcc libpq-dev
 # make folder for 
 WORKDIR /app
 

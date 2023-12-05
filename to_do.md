@@ -1,1 +1,1 @@
-command to activate virtual enviroment& :   "D:/Programming/my work/Greeny/AmazonClone/Scripts/Activate.ps1"
+command to activate virtual enviroment& :   & "D:/Programming/my work/Greeny/AmazonClone/Scripts/Activate.ps1"
