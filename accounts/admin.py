@@ -1,3 +1,6 @@
 from django.contrib import admin
+from .models import Profile,DeliveryAddress,ContactNumber
 
-# Register your models here.
+admin.site.register(Profile)
+admin.site.register(DeliveryAddress)
+admin.site.register(ContactNumber)

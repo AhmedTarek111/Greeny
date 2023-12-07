@@ -185,6 +185,10 @@ LANGUAGES = [
     ("en", _("English")),
 ]
 
+AUTHENTICATION_BACKENDS = [
+    'accounts.backends.EmailOrUsernameModelBackends',
+]
+
 # CACHES = {
 #     "default": {
 #         "BACKEND": "django.core.cache.backends.redis.RedisCache",
