@@ -15,13 +15,21 @@ class CartAPI(GenericAPIView):
     def post(self,request,*args, **kwargs):
         user=User.objects.get(username=self.kwargs['username'])
         cart =Cart.objects.get(user=user, status='In Progress')
-        product=Product.objects.get(id=request.data['product_id'])
+        product=Product.objects.get(id=request.data.get('product_id'))
         quantity = int(request.data.get('quantity'))
-        cart_detail,created=CartDetail.objects.get_or_create(cart=cart,products=product )
-        cart_detail.total=round(product.price * quantity,2)
-        cart_detail.quantity=quantity
+        price = product.price
+        cart_detail, created = CartDetail.objects.get_or_create(cart=cart, products=product, defaults={
+                'quantity': quantity,
+                'total': round(price * quantity, 2),
+                'price': price,
+            })
+        if created:                 
+            cart_detail.total=round(product.price * quantity,2)
+            cart_detail.quantity=quantity
+        else:
+            cart_detail.quantity +=1
+            
         cart_detail.save()
-
         cart =Cart.objects.get(user=user, status='In Progress')
         data =CartSerializers(cart).data
         return Response({'message':'product added successfully' , 'data':data})
@@ -116,4 +124,3 @@ class ApplyCouponAPI(GenericAPIView):
                     return Response({'message':'the coupon time not valid'})
         else:
                 return Response({'message':'the coupon not valid'})
-    

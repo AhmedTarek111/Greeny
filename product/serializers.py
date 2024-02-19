@@ -27,6 +27,7 @@ class ProductDetailSerializers(serializers.ModelSerializer,TaggitSerializer,):
     avg_rate=serializers.SerializerMethodField()
     brand = serializers.StringRelatedField()
     tags = TagListSerializerField()
+    
     class Meta:
         model = Product
         fields = '__all__'
