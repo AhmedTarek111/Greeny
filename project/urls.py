@@ -33,6 +33,8 @@ urlpatterns = [
     path("__debug__/", include("debug_toolbar.urls")),
     # AUTHENTICATION 
     path('dj-rest-auth/', include('dj_rest_auth.urls')),
+    path('dj-rest-auth/registration/', include('dj_rest_auth.registration.urls')),
+    path('accounts/',include('django.contrib.auth.urls')),
     #jwt token 
     path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'), 

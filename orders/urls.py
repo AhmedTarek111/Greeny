@@ -4,6 +4,7 @@ from .api import *
 app_name='orders'
 
 urlpatterns = [
+    
     path('',OrderList.as_view()),
     path('checkout/',order_checkout,name='checkout'),
     path('add_to_cart/',add_to_cart,name='add_to_cart'),
@@ -15,6 +16,5 @@ urlpatterns = [
     path('api/<str:username>/<int:pk>',OrderDetailAPI.as_view()),
     path('api/<str:username>/create_order',CreateOrderAPI.as_view()),
     path('api/<str:username>/apply_coupon',ApplyCouponAPI.as_view()),
-
 
 ]

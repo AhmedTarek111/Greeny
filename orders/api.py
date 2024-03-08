@@ -7,6 +7,7 @@ import datetime
 from django.contrib.auth.models import User
 
 class CartAPI(GenericAPIView):
+    
     def get(self,request,*args, **kwargs):
         cart,created =Cart.objects.get_or_create(user=User.objects.get(username=self.kwargs['username']), status='In Progress')
         data= CartSerializers(cart).data
@@ -34,8 +35,8 @@ class CartAPI(GenericAPIView):
         data =CartSerializers(cart).data
         return Response({'message':'product added successfully' , 'data':data})
         
-
     def delete(self,request,*args, **kwargs):
+
         user=User.objects.get(username=self.kwargs['username'])
         cart =Cart.objects.get(user=user, status='In Progress')
         product=Product.objects.get(id=request.data['product_id'])
