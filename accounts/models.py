@@ -3,7 +3,6 @@ from django.contrib.auth.models import User
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 from utils.generate_codes import generate_code
-# Create your models here.
 
 class Profile(models.Model):
     user = models.OneToOneField(User,on_delete=models.CASCADE,related_name='profile')
@@ -16,6 +15,10 @@ class Profile(models.Model):
             Profile.objects.create(
                 user = instance
             )
+
+    def __str__(self) :
+        return str(self.user)
+    
 CONTACT_NUMBER_CHOICES = (
     ('Primary','Primary'),
     ('Secondary','Secondary'),
@@ -26,6 +29,8 @@ class ContactNumber(models.Model):
     number = models.CharField(max_length=20)
     type= models.CharField(max_length=50,choices=CONTACT_NUMBER_CHOICES)
     
+    def __str__(self) :
+        return str(self.user)
     
 Delivery_Address_CHOICES = (
     ('Home','Home'),
@@ -41,5 +46,6 @@ class DeliveryAddress(models.Model):
     address = models.CharField(max_length=200 )
     notes = models.TextField(null=True,blank=True)
     
-
+    def __str__(self) :
+        return str(self.user)
     
