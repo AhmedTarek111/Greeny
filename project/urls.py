@@ -43,7 +43,7 @@ urlpatterns = [
     path('dj-rest-auth/', include('dj_rest_auth.urls')),
     path('dj-rest-auth/registration/', include('dj_rest_auth.registration.urls')),
     # profile 
-    path('accounts/profile/',profileview)
+    path('accounts/profile/',profileview, name='profile')
     
     
 ]
