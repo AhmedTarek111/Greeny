@@ -121,7 +121,7 @@
                     <a href="index.html" class="header-logo">
                         <img src="{{company_data.logo.url}}" alt="logo">
                     </a>
-                    <a href="login.html" class="header-widget" title="My Account">
+                    <a href="{% url "login" %}" class="header-widget" title="My Account">
                         <img src="{% static 'en/images/user.png' %}" alt="user">
                         <span>join</span>
                     </a>
@@ -424,7 +424,7 @@
             </div>
             <div class="nav-content">
                 <div class="nav-btn">
-                    <a href="login.html" class="btn btn-inline">
+                    <a href="{% url "login" %}" class="btn btn-inline">
                         <i class="fa fa-unlock-alt"></i>
                         <span>join here</span>
                     </a>
@@ -498,7 +498,7 @@
                     <li>
                         <a class="nav-link dropdown-link" href="#"><i class="icofont-lock"></i>authentication</a>
                         <ul class="dropdown-list">
-                            <li><a href="login.html">login</a></li>
+                            <li><a href="{% url "login" %}">login</a></li>
                             <li><a href="register.html">register</a></li>
                             <li><a href="reset-password.html">reset password</a></li>
                             <li><a href="change-password.html">change password</a></li>
@@ -520,7 +520,7 @@
                     <li><a class="nav-link" href="privacy.html"><i class="icofont-warning"></i>privacy policy</a></li>
                     <li><a class="nav-link" href="coming-soon.html"><i class="icofont-options"></i>coming soon</a></li>
                     <li><a class="nav-link" href="error.html"><i class="icofont-ui-block"></i>404 error</a></li>
-                    <li><a class="nav-link" href="login.html"><i class="icofont-logout"></i>logout</a></li>
+                    <li><a class="nav-link" href="{% url "login" %}"><i class="icofont-logout"></i>logout</a></li>
                 </ul>
                 <div class="nav-info-group">
                     <div class="nav-info">
