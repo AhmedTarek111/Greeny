@@ -51,6 +51,7 @@ INSTALLED_APPS = [
     'django.contrib.sites',
     'allauth',
     'allauth.account',
+    'allauth.socialaccount',
     'dj_rest_auth.registration',
     'orders',
     'redis',
@@ -201,4 +202,4 @@ AUTHENTICATION_BACKENDS = [
 # CELERY_RESULT_BACKEND="redis://127.0.0.1:6379/0"
 
 LOGIN_REDIRECT_URL='/'
-LOGOUT_REDIRECT_URL='/'
+# LOGOUT_REDIRECT_URL='/accounts/'

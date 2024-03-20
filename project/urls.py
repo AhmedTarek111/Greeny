@@ -18,12 +18,13 @@ from django.contrib import admin
 from django.urls import path ,include
 from django.conf import settings
 from django.conf.urls.static import static
-from accounts.views import profileview
+from accounts.views import profileview,activate,signup
 from rest_framework_simplejwt.views import (
     TokenObtainPairView,
     TokenRefreshView,
 )
-urlpatterns = [
+
+urlpatterns = [ 
     # apps
     path('admin/', admin.site.urls),
     path('', include('product.urls',namespace='products' ) ),
@@ -43,7 +44,9 @@ urlpatterns = [
     path('dj-rest-auth/', include('dj_rest_auth.urls')),
     path('dj-rest-auth/registration/', include('dj_rest_auth.registration.urls')),
     # profile 
-    path('accounts/profile/',profileview, name='profile')
+    path('accounts/profile/',profileview, name='profile'),
+    path('accounts/signup/',signup,name='signup'),
+    path('accounts/activate/<str:username>/',activate,name='activation'),
     
     
 ]

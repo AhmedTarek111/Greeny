@@ -1,9 +1,10 @@
-from django.shortcuts import render
 from django.views.generic import DetailView
-from .models import Profile, ContactNumber,DeliveryAddress,Delivery_Address_CHOICES,CONTACT_NUMBER_CHOICES
-from django.shortcuts import redirect
 from django.shortcuts import redirect, render
+from django.core.mail import send_mail
+from .models import Profile, ContactNumber,DeliveryAddress,Delivery_Address_CHOICES,CONTACT_NUMBER_CHOICES
 from .models import ContactNumber, DeliveryAddress
+from .forms import UserSignupForm,ActivationCodeForm
+from django.contrib.auth.models import User
 
 def profileview(request):
     user = request.user
@@ -40,3 +41,45 @@ def profileview(request):
             'deliveryaddresses': delivery_addresses,
             'types_of_delivery_address':types_of_delivery_address,
         })
+
+def signup(request):
+    if request.method == 'POST':
+        form = UserSignupForm(request.POST)
+        if form.is_valid():
+            username = form.cleaned_data['username']
+            email = form.cleaned_data['email']
+            form.save()
+            user = User.objects.get(username =username)
+            user.is_active = False
+            profile= Profile.objects.get(user=user)
+            send_mail(
+                "Activate your account",
+                f'''Welcome Mr/s {username} to Greeny.
+                    use this code {profile.code}
+                ''',
+                f"ahmed@gmail.com",
+                [f"{email}"],
+                fail_silently=False,
+            )
+            return redirect(f'/accounts/activate/{username}')
+    else:
+        form = UserSignupForm()
+    
+    return render(request,'registration/register.html',{'form':form})
+    
+def activate(request,username):
+    user = User.objects.get(username=username)
+    profile = Profile.objects.get(user=user.id)
+    if request.method == 'POST':
+        form = ActivationCodeForm(request.POST)
+        if form.is_valid():
+            code = form.cleaned_data['code']
+            if code == profile.code:
+                profile.user.is_active = True
+                profile.code = ''
+                profile.save()
+                return redirect ('/')
+        
+    else:
+        form = ActivationCodeForm()
+    return render(request,'registration/code.html',{'form':form})
