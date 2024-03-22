@@ -103,6 +103,7 @@ TEMPLATES = [
                 'django.contrib.messages.context_processors.messages',
                 'settings.company_context_processors.company_data',
                 'orders.cart_context_processor.get_create_cart',
+                # 'accounts.profile_context_processor.profile_details'
             ],
         },
     },

@@ -121,10 +121,18 @@
                     <a href="index.html" class="header-logo">
                         <img src="{{company_data.logo.url}}" alt="logo">
                     </a>
+                    {% if  user.is_authenticated %}
+                        <a href="{% url "profile" %}" class="header-widget" title="My Account">
+                            <img src='{{ profile.image }}' alt="user">
+                            <span>Profile</span>
+                        </a>
+                    {% else %}
+            
                     <a href="{% url "signup" %}" class="header-widget" title="My Account">
                         <img src="{% static 'en/images/user.png' %}" alt="user">
                         <span>join</span>
                     </a>
+                    {% endif %}
 
                     <form class="header-form">
                         <input type="text" placeholder="Search anything...">
