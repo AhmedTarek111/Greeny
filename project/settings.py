@@ -56,6 +56,7 @@ INSTALLED_APPS = [
     'orders',
     'redis',
     "bootstrap5",
+    'drf_yasg',
 ]
 
 SITE_ID = 1
