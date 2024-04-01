@@ -2,11 +2,10 @@
 {% load static %}
 
 {% block css %}
-    <link rel="stylesheet" href="{% static 'en//css/checkout.css' %}">
+    <link rel="stylesheet" href="{% static 'en/css/checkout.css' %}">
 {% endblock css %}
 
 {% block body %}
-        <link rel="stylesheet" href="css/checkout.css">
 
         <section class="inner-section single-banner" style="background: url(images/single-banner.jpg) no-repeat center;">
             <div class="container">
@@ -31,7 +30,7 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="alert-info">
-                            <p>Returning customer? <a href="login.html">Click here to login</a></p>
+                            <p>Returning customer? <a href="{% url "login" %}l">Click here to login</a></p>
                         </div>
                     </div>
                     <div class="col-lg-12">
@@ -211,7 +210,7 @@
                                 <div class="row">
                                     <div class="col-md-6 col-lg-4 alert fade show">
                                         <div class="payment-card payment active">
-                                            <img src="images/payment/png/01.png" alt="payment">
+                                            <img src="{% static 'en/images/payment/png/01.png' %}" alt="payment">
                                             <h4>card number</h4>
                                             <p>
                                                 <span>****</span>
@@ -225,7 +224,7 @@
                                     </div>
                                     <div class="col-md-6 col-lg-4 alert fade show">
                                         <div class="payment-card payment">
-                                            <img src="images/payment/png/02.png" alt="payment">
+                                            <img src="{% static 'en/images/payment/png/02.png' %}" alt="payment">
                                             <h4>card number</h4>
                                             <p>
                                                 <span>****</span>
@@ -239,7 +238,7 @@
                                     </div>
                                     <div class="col-md-6 col-lg-4 alert fade show">
                                         <div class="payment-card payment">
-                                            <img src="images/payment/png/03.png" alt="payment">
+                                            <img src="{% static 'en/images/payment/png/03.png' %}" alt="payment">
                                             <h4>card number</h4>
                                             <p>
                                                 <span>****</span>
@@ -258,7 +257,7 @@
                                 <label for="checkout-check">By making this purchase you agree to our <a href="#">Terms and Conditions</a>.</label>
                             </div>
                             <div class="checkout-proced">
-                                <a href="invoice.html" class="btn btn-inline">proced to checkout</a>
+                                <button type="button" onclick="buy(event)" href="invoice.html" class="btn btn-inline">proced to checkout</button>
                             </div>
                         </div>
                     </div>
@@ -440,6 +439,7 @@
                     NEWSLETTER PART END
         =======================================-->
         <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+        <script src="https://js.stripe.com/v3/"></script>
         <script>
             $(document).ready(function(e) {
                 $(document).on('submit', '#applyCoupon', function(e) {
@@ -451,16 +451,41 @@
                         dataType: 'json',
                         success: function(response) {
                             $('#checkoutTable').html(response['result'])
-                            //$('#review-form').trigger('reset');
+                            $('#applyCoupon').trigger('reset');
                         },
                         error: function() {
                         },
                     });
                 });
             });
+
+            function buy(event) {
+                var stripe = Stripe('{{pub_key}}');
+            
+                fetch('/orders/checkout/payment/', {
+                    method: 'POST',
+                    headers: {
+                        'X-CSRFTOKEN': '{{ csrf_token }}',
+                        'Content-Type': 'application/json',
+                    }
+                })
+                .then(function(response) {
+                    if (!response.ok) {
+                        throw new Error('Failed to fetch session data');
+                    }
+                    return response.json();
+                })
+                .then(function(session) {
+                    return stripe.redirectToCheckout({ sessionId: session.session.id });
+                })
+                .catch(function(error) {
+                    console.error('Error fetching session data:', error);
+                });
+            }
+                
+            
         </script>
-        
-        </script>
+
 
 {% endblock body %}
 

@@ -7,6 +7,10 @@ import datetime
 from django.http import JsonResponse 
 from django.template.loader import render_to_string 
 from .models import Deleviry_fee
+import stripe
+from django.conf import settings
+from utils.generate_codes import generate_code
+
 class OrderList(LoginRequiredMixin,ListView):
     model = Order
     paginate_by =3
@@ -20,6 +24,7 @@ def order_checkout(request):
     cart_detail =CartDetail.objects.filter(cart=cart)
     delivery_fee = Deleviry_fee.objects.last().fee
     discount_value=0
+    pub_key=settings.STRIPE_PUBLISHABLE_KEY
     if request.method == 'POST':
         coupon = Coupon.objects.get(code=request.POST['code'])
         if coupon and coupon.quantity > 0:
@@ -53,6 +58,7 @@ def order_checkout(request):
             'cart_total': total,
             'coupon': discount_value,
             'delivery_fee': delivery_fee,
+            'pub_key':pub_key
     })
 
 def add_to_cart(request):
@@ -78,3 +84,50 @@ def remove_from_cart(request):
     cart_detail=CartDetail.objects.get(id=id)
     cart_detail.delete()
     return redirect(f"/products/")
+
+    
+def create_checkout_session(request):
+    cart = Cart.objects.get(user=request.user,status='In Progress')
+    cart_detail = CartDetail.objects.filter(cart=cart)
+    deleviry_fee = Deleviry_fee.objects.last().fee
+    total_after_coupon=cart.total_after_coupon
+    stripe.api_key = settings.STRIPE_SECRET_KEY
+    code = generate_code()
+    
+    if cart.total_after_coupon:
+        
+        total = total_after_coupon+ deleviry_fee
+        
+    else:
+        total = cart.cart_total() + deleviry_fee
+        
+  
+    checkout_session = stripe.checkout.Session.create(
+        line_items=[
+            {
+                    'price_data':{
+                        'currency':'usd',
+                        'product_data':{
+                            'name': code 
+                        },
+                        'unit_amount':int(total*100),
+                    },
+                    'quantity':1
+             
+            },
+        ],
+        mode='payment',
+        success_url='http://127.0.0.1:8000/orders/checkout/payment/success/',
+        cancel_url='http://127.0.0.1:8000/orders/checkout/payment/failed/',
+    )
+   
+
+    return JsonResponse({'session':checkout_session})
+
+
+
+def payment_success(request):
+    return render(request,'orders/payment_success.html')
+
+def payment_failed(request):
+    return render(request,'orders/payment_failed.html')

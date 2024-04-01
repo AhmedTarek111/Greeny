@@ -13,7 +13,7 @@ class Cart(models.Model):
     user = models.ForeignKey(User,on_delete=models.CASCADE,related_name='cart_user')
     status = models.CharField(max_length=50,choices=CART_CHOICES)
     coupon = models.ForeignKey('Coupon',on_delete=models.SET_NULL,null=True,blank=True,related_name='cart_coupon')
-    total_after_coupon = models.CharField(max_length=30,null=True,blank=True)
+    total_after_coupon = models.FloatField(max_length=30,null=True,blank=True)
 
     def cart_total(self):
         total = 0

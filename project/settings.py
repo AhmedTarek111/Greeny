@@ -13,7 +13,6 @@ from django.utils.translation import gettext_lazy as _
 from pathlib import Path
 import os 
 
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
@@ -57,6 +56,7 @@ INSTALLED_APPS = [
     'redis',
     "bootstrap5",
     'drf_yasg',
+    "corsheaders",
 ]
 
 SITE_ID = 1
@@ -75,6 +75,7 @@ MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     "django.middleware.locale.LocaleMiddleware",
+    "corsheaders.middleware.CorsMiddleware",
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     "debug_toolbar.middleware.DebugToolbarMiddleware",
@@ -204,4 +205,9 @@ AUTHENTICATION_BACKENDS = [
 # CELERY_RESULT_BACKEND="redis://127.0.0.1:6379/0"
 
 LOGIN_REDIRECT_URL='/'
-# LOGOUT_REDIRECT_URL='/accounts/'
+
+# STRIPE_PUBLISHABLE_KEY = os.environ.get('STRIPE_PUBLISHABLE_KEY')
+# STRIPE_SECRET_KEY = os.environ.get('STRIPE_SECRET_KEY')
+STRIPE_PUBLISHABLE_KEY='pk_test_51P0AwpAXaT2JZAI5EDass77YZtzPYUexs4ZyJo8JAeuPz2HKRZbJtwRPBORkeI9LE9P7oD6lfPFY8MW0xCHYvraS004VtM0AyS'
+STRIPE_SECRET_KEY='sk_test_51P0AwpAXaT2JZAI5R5TYhBAnqKKmxLwWhjOTRj0fTJumCckJs70NRn0dxQefDwTPA6fBOPDkqzyNFrvnMTCk7E2c008gKOekkM'
+CORS_ALLOW_ALL_ORIGINS=True
