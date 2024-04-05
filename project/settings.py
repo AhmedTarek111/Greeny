@@ -12,9 +12,11 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 from django.utils.translation import gettext_lazy as _
 from pathlib import Path
 import os 
+from dotenv import load_dotenv
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+load_dotenv()
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
@@ -206,8 +208,7 @@ AUTHENTICATION_BACKENDS = [
 
 LOGIN_REDIRECT_URL='/'
 
-# STRIPE_PUBLISHABLE_KEY = os.environ.get('STRIPE_PUBLISHABLE_KEY')
-# STRIPE_SECRET_KEY = os.environ.get('STRIPE_SECRET_KEY')
-STRIPE_PUBLISHABLE_KEY='pk_test_51P0AwpAXaT2JZAI5EDass77YZtzPYUexs4ZyJo8JAeuPz2HKRZbJtwRPBORkeI9LE9P7oD6lfPFY8MW0xCHYvraS004VtM0AyS'
-STRIPE_SECRET_KEY='sk_test_51P0AwpAXaT2JZAI5R5TYhBAnqKKmxLwWhjOTRj0fTJumCckJs70NRn0dxQefDwTPA6fBOPDkqzyNFrvnMTCk7E2c008gKOekkM'
+STRIPE_PUBLISHABLE_KEY = os.getenv('STRIPE_PUBLISHABLE_KEY')
+STRIPE_SECRET_KEY = os.getenv('STRIPE_SECRET_KEY')
+
 CORS_ALLOW_ALL_ORIGINS=True

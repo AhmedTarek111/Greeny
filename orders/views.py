@@ -127,6 +127,27 @@ def create_checkout_session(request):
 
 
 def payment_success(request):
+    cart = Cart.objects.get(user=request.user,status='In Progress')
+    cart_detail= CartDetail.objects.filter(cart= cart)
+    
+    new_order = Order.objects.create(
+        user = request.user,
+        code =  generate_code(),
+        status= 'Order Recieved',
+        coupon = cart.coupon,
+        total_after_coupon = cart.total_after_coupon,
+        )
+    for object in cart_detail:
+        OrderDetail.objects.create(
+            order=new_order,
+            products = object.products,
+            price= object.products.price,
+            quantity = object.quantity,
+            total = round(int(object.quantity)*object.products.price,2)
+            
+        )
+        cart.status = 'Completed'
+        cart.save()
     return render(request,'orders/payment_success.html')
 
 def payment_failed(request):
