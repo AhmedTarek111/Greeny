@@ -43,6 +43,7 @@ schema_view = get_schema_view(
 
 urlpatterns = [ 
     # apps
+    path('i18n/', include('django.conf.urls.i18n')),
     path('admin/', admin.site.urls),
     path('', include('product.urls',namespace='products' ) ),
     path('', include('settings.urls')),

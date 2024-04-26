@@ -77,7 +77,7 @@ MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     "django.middleware.locale.LocaleMiddleware",
-    "corsheaders.middleware.CorsMiddleware",
+    # "corsheaders.middleware.CorsMiddleware",
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     "debug_toolbar.middleware.DebugToolbarMiddleware",
@@ -126,6 +126,17 @@ DATABASES = {
     }
 }
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'db',
+#         'USER': 'postgres',
+#         'PASSWORD': 'postgres',
+#         'HOST': 'db',  
+#         'PORT': '5432',
+#     },
+# }
+
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
@@ -149,11 +160,9 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
 
 TIME_ZONE = 'UTC'
 
-USE_I18N = True
 
 USE_TZ = True
 
@@ -184,13 +193,19 @@ REST_AUTH = {
     'JWT_AUTH_COOKIE': 'jwt-auth',
 }
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-LOCALE_PATHS = [
-    "locale",
-]
+
+# translaiton 
+USE_I18N = True
+LANGUAGE_CODE = 'ar'
+
+LOCALE_PATHS = ["locale"]
+USE_L10N = True  
+
 LANGUAGES = [
     ("ar", _("Arabic")),
     ("en", _("English")),
 ]
+
 
 AUTHENTICATION_BACKENDS = [
     'accounts.backends.EmailOrUsernameModelBackends',

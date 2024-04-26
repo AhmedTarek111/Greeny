@@ -71,4 +71,3 @@ class Review(models.Model):
     date = models.DateTimeField(verbose_name=_("Date"),default=timezone.now)
     def __str__(self):
         return f"{str(self.product)} -> {self.review}"
-    

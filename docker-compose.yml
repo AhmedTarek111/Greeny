@@ -1,37 +1,41 @@
-  version: '3.8'
+version: '3.8'
+services:
+  backend:
+    build: .
+    command: bash -c "python manage.py makemigrations && python manage.py migrate && python manage.py runserver 0.0.0.0:8000"
+    ports:
+      - "8000:8000"
+    container_name: djBackend
+    environment:
+      - POSTGRES_DB=db
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_HOST=db  
+    depends_on:
+      - db
 
-  services:
-    backend:
-      build: .
-      command: python manage.py runserver 0.0.0.0:8000
-      ports:
-        - "8000:8000"
-      container_name: djBackend
-      depends_on:
-        - db
+    # Myredis:
+    #   image: redis:7.0.14-alpine3.18
+    #   container_name: MyRedisServer
 
-    Myredis:
-      image: redis:7.0.14-alpine3.18
-      container_name: MyRedisServer
+    # celery:
+    #   build: .
+    #   command: celery -A project worker --loglevel=info
+    #   depends_on:
+    #     - Myredis
+    #     - backend
 
-    celery:
-      build: .
-      command: celery -A project worker --loglevel=info
-      depends_on:
-        - Myredis
-        - backend
+  db:
+    image: postgres:latest
+    container_name: my_postgres_container
+    environment:
+      - POSTGRES_DB=db
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - db-data:/var/lib/postgresql/data
 
-    db:
-      image: postgres:latest
-      container_name: my_postgres_container
-      environment:
-        POSTGRES_DB: postgres
-        POSTGRES_USER: postgres
-        POSTGRES_PASSWORD: postgres
-      ports:
-        - "5432:5432"
-      volumes:
-        - postgres_data:/var/lib/postgresql/data
-
-  volumes:
-    postgres_data:
+volumes:
+  db-data:

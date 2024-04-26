@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block body %}
-
+{% load i18n %}
         <!--=====================================
                     PRODUCT VIEW END
         =======================================-->
@@ -16,16 +16,16 @@
                     <div class="row align-items-center">
                         <div class="col-md-6 col-lg-6">
                             <div class="banner-content">
-                                <h1>free home delivery within 24 hours now.</h1>
+                                <h1>{% translate "free home delivery within 24 hours now." %}</h1>
                                 <p>Lorem ipsum dolor consectetur adipisicing elit modi consequatur eaque expedita porro necessitatibus eveniet voluptatum quis pariatur Laboriosam molestiae architecto excepturi</p>
                                 <div class="banner-btn">
                                     <a class="btn btn-inline" href="shop-4column.html">
                                         <i class="fas fa-shopping-basket"></i>
-                                        <span>shop now</span>
+                                        <span>{% translate "shop now" %}</span>
                                     </a>
                                     <a class="btn btn-outline" href="offer.html">
                                         <i class="icofont-sale-discount"></i>
-                                        <span>get offer</span>
+                                        <span>{% translate "get offer" %}</span>
                                     </a>
                                 </div>
                             </div>
@@ -48,7 +48,7 @@
                         </div>
                         <div class="col-md-6 col-lg-6">
                             <div class="banner-content">
-                                <h1>free home delivery within 24 hours now.</h1>
+                                <h1>{% translate "free home delivery within 24 hours now." %}</h1>
                                 <p>Lorem ipsum dolor consectetur adipisicing elit modi consequatur eaque expedita porro necessitatibus eveniet voluptatum quis pariatur Laboriosam molestiae architecto excepturi</p>
                                 <div class="banner-btn">
                                     <a class="btn btn-inline" href="shop-4column.html">
@@ -57,7 +57,7 @@
                                     </a>
                                     <a class="btn btn-outline" href="offer.html">
                                         <i class="icofont-sale-discount"></i>
-                                        <span>get offer</span>
+                                        <span>{% translate "get offer" %}</span>
                                     </a>
                                 </div>
                             </div>
@@ -103,7 +103,7 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="section-heading">
-                            <h2>recently sold items</h2>
+                            <h2>{% translate "recently sold items" %}</h2>
                         </div>
                     </div>
                 </div>
@@ -145,7 +145,7 @@
                                     </h6>
                                     <button class="product-add" title="Add to Cart">
                                         <i class="fas fa-shopping-basket"></i>
-                                        <span>add</span>
+                                        <span>{% translate "add" %}</span>
                                     </button>
                                     <div class="product-action">
                                         <button class="action-minus" title="Quantity Minus"><i class="icofont-minus"></i></button>
@@ -163,7 +163,7 @@
                         <div class="section-btn-25">
                             <a href="shop-4column.html" class="btn btn-outline">
                                 <i class="fas fa-eye"></i>
-                                <span>show more</span>
+                                <span>{% translate "show more" %}</span>
                             </a>
                         </div>
                     </div>
@@ -185,7 +185,7 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="section-heading">
-                            <h2>our featured items</h2>
+                            <h2>{% translate "our featured items" %}</h2>
                         </div>
                     </div>
                 </div>
@@ -227,7 +227,7 @@
                                     <p class="feature-desc">{{feature_products.description}}</p>
                                     <button class="product-add" title="Add to Cart">
                                         <i class="fas fa-shopping-basket"></i>
-                                        <span>add</span>
+                                        <span>{% translate "add" %}</span>
                                     </button>
                                     <div class="product-action">
                                         <button class="action-minus" title="Quantity Minus"><i class="icofont-minus"></i></button>
@@ -245,7 +245,7 @@
                         <div class="section-btn-25">
                             <a href="shop-4column.html" class="btn btn-outline">
                                 <i class="fas fa-eye"></i>
-                                <span>show more</span>
+                                <span>{% translate "show more" %}</span>
                             </a>
                         </div>
                     </div>
@@ -268,7 +268,7 @@
                 <div class="row">
                     <div class="col">
                         <div class="section-heading">
-                            <h2>collected new items</h2>
+                            <h2>{% translate "collected new items" %}</h2>
                         </div>
                     </div>
                 </div>
@@ -331,7 +331,7 @@
                         <div class="section-btn-25">
                             <a href="shop-4column.html" class="btn btn-outline">
                                 <i class="fas fa-eye"></i>
-                                <span>show more</span>
+                                <span>{% translate "show more" %}</span>
                             </a>
                         </div>
                     </div>
@@ -353,7 +353,7 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="section-heading">
-                            <h2>Browse by Top Niche</h2>
+                            <h2>{% translate "Browse by Top Niche" %}</h2>
                         </div>
                     </div>
                 </div>
@@ -363,19 +363,19 @@
                             <li>
                                 <a href="#top-order" class="tab-link active" data-bs-toggle="tab">
                                     <i class="icofont-price"></i>
-                                    <span>top order</span>
+                                    <span>{% translate "top order" %}</span>
                                 </a>
                             </li>
                             <li>
                                 <a href="#top-rate" class="tab-link" data-bs-toggle="tab">
                                     <i class="icofont-star"></i>
-                                    <span>top rating</span>
+                                    <span>{% translate "top rating" %}</span>
                                 </a>
                             </li>
                             <li>
                                 <a href="#top-disc" class="tab-link" data-bs-toggle="tab">
                                     <i class="icofont-sale-discount"></i>
-                                    <span>top discount</span>
+                                    <span>{% translate "top discount " %}</span>
                                 </a>
                             </li>
                         </ul>
@@ -2060,7 +2060,6 @@
                     INTRO PART START
         =======================================-->
        
-
 {% endblock body %}
 
 
